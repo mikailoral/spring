@@ -38,8 +38,6 @@ public class UserServer {
 
 	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
 	public @ResponseBody List<User> getUsers() {
-		logger.debug("xxxxxx/ntestdebug");
-		logger.error("xxxxxx/ntesterror");
 
 		List<User> list = service.findAllUsers();
 		for (User user : list) {
@@ -50,10 +48,6 @@ public class UserServer {
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.POST)
 	public @ResponseBody User addUser(@RequestBody User user) {
-		logger.debug(user);
-		System.out.println("userxxxxxx/n/n/n/n/n" + user + "/n/n/n/n");
-		logger.error("userxxxxxx/n/n/n/n/n" + user + "/n/n/n/n");
-		logger.debug("userxxxxxx/n/n/n/n/n" + user + "/n/n/n/n");
 		service.saveUser(user);
 		return user;
 	}
