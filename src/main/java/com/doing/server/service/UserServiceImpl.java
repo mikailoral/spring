@@ -29,19 +29,50 @@ public class UserServiceImpl implements UserService {
 	 * Just fetch the entity from db and update it with proper values within transaction.
 	 * It will be updated in db once transaction ends. 
 	 */
-	public void updateUser(User user) {
+	public User updateUser(User user) {
+		User entity = dao.findById(user.getId());
+		if (entity != null) {
+			if (user.getEmail() != null) {
+				entity.setEmail(user.getEmail());
+			}
+			if (user.getFullname() != null) {
+				entity.setFullname(user.getFullname());
+			}
+			if (user.getPassword() != null) {
+				entity.setPassword(user.getPassword());
+			}
+			if (user.getPhone1() != null) {
+				entity.setPhone1(user.getPhone1());
+			}
+			if (user.getPhone2() != null) {
+				entity.setPhone2(user.getPhone2());
+			}
+			if (user.getPhoto() != null) {
+				entity.setPhoto(user.getPhoto());
+			}
+			if (user.getRole() != 0) {
+				entity.setRole(user.getRole());
+			}
+		}
+		
+		return entity;
+	}
+	
+	public User updateLocation(User user) {
 		User entity = dao.findById(user.getId());
 		if(entity!=null){
-			entity.setFullname(user.getFullname());
+			entity.setXlocation(user.getXlocation());
+			entity.setYlocation(user.getYlocation());
 		}
+		return entity;
 	}
 
 	public void deleteUserById(int id) {
 		dao.deleteUserById(id);
 	}
 	
-	public List<User> findAllUsers() {
-		return dao.findAllUsers();
+	public List<User> findAllUsers(User user) {
+		return dao.findAllUsers(user);
 	}
 
 	public User findUserByName(String name) {

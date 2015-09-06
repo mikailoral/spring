@@ -13,6 +13,7 @@ import com.doing.server.pojo.User;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
 
 	public User findById(int id) {
@@ -20,18 +21,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	public void saveUser(User user) {
-		logger.debug("----------------------------------------------------------------------");
-		logger.debug(user.getId());
-		logger.debug(user.getEmail());
-		logger.debug(user.getFullname());
-		logger.debug(user.getPassword());
-		logger.debug(user.getPhone1());
-		logger.debug(user.getPhone2());
-		logger.debug(user.getXlocation());
-		logger.debug(user.getYlocation());
-		logger.debug(user.getCompanyid());
-		logger.debug(user.getRole());
-		logger.debug("----------------------------------------------------------------------");
 		persist(user);
 	}
 
@@ -42,7 +31,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> findAllUsers() {
+	public List<User> findAllUsers(User user) {
 		Criteria criteria = createEntityCriteria();
 		return (List<User>) criteria.list();
 	}

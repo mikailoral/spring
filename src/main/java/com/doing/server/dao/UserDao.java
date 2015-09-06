@@ -9,7 +9,7 @@ public interface UserDao {
 	User findById(int id);
 	void saveUser(User user);
 	void deleteUserById(int id);
-	List<User> findAllUsers();
-	User findUserByName(String ssn);
+	List<User> findAllUsers(User user);
+	User findUserByName(String name);
 
 }

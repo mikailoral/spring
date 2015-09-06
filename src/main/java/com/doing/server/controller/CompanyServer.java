@@ -1,9 +1,6 @@
 package com.doing.server.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +18,7 @@ import com.doing.server.service.CompanyService;
 @RestController
 public class CompanyServer {
 
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(CompanyServer.class);
 
 	@Autowired
@@ -29,55 +27,41 @@ public class CompanyServer {
 	@Autowired
 	private HttpServletRequest request;
 
-	@RequestMapping(value = "/company", method = RequestMethod.GET)
-	public @ResponseBody Company getMood() {
 
-		Company mood = new Company();
-		mood.setId(1);
-		mood.setName("name");
-		System.out.println(mood);
-		return mood;
-	}
+	@RequestMapping(value = "/companylist", method = RequestMethod.POST)
+	public @ResponseBody List<Company> getCompanys(@RequestBody Company companyp) {
 
-	@RequestMapping(value = "/companylist", method = RequestMethod.GET)
-	public @ResponseBody List<Company> getMoods() {
-		logger.debug("xxxxxx/ntestdebug");
-		logger.error("xxxxxx/ntesterror");
-
-		List<Company> list = service.findAllCompanies();
+		List<Company> list = service.findAllCompanys(companyp);
 		for (Company company : list) {
-			logger.error("xxxxxx/n" + company);
+			System.out.println(company);
 		}
 		return list;
 	}
 
 	@RequestMapping(value = "/addcompany", method = RequestMethod.POST)
-	public @ResponseBody Company addMood(@RequestBody Company company) {
-		logger.debug(company);
-		System.out.println("companyxxxxxx/n" + company);
+	public @ResponseBody Company addCompany(@RequestBody Company company) {
 		service.saveCompany(company);
 		return company;
 	}
-
-	// get user agent
-	private String getUserAgent() {
-		return request.getHeader("user-agent");
+	
+	@RequestMapping(value = "/updatecompany", method = RequestMethod.POST)
+	public @ResponseBody Company updateCompany(@RequestBody Company company) {
+		service.updateCompany(company);
+		return company;
 	}
 
-	// get request headers
-	@RequestMapping(value = "/map", method = RequestMethod.POST)
-	private @ResponseBody Map<String, String> getHeadersInfo() {
-
-		Map<String, String> map = new HashMap<String, String>();
-
-		Enumeration headerNames = request.getHeaderNames();
-		while (headerNames.hasMoreElements()) {
-			String key = (String) headerNames.nextElement();
-			String value = request.getHeader(key);
-			map.put(key, value);
-		}
-
-		return map;
+	@RequestMapping(value = "/deletecompany", method = RequestMethod.POST)
+	public @ResponseBody Company deleteCompany(@RequestBody Company company) {
+		service.deleteCompanyById(company.getId());
+		return company;
 	}
+	
+	@RequestMapping(value = "/getcompany", method = RequestMethod.POST)
+	public @ResponseBody Company findById(@RequestBody Company company) {
+		service.findById(company.getId());
+		return company;
+	}
+
+
 
 }

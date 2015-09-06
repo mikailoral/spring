@@ -9,12 +9,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.doing.server.pojo.Company;
-import com.doing.server.service.CompanyServiceImpl;
 
 @Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements CompanyDao {
 	
-	private static final Logger logger = Logger.getLogger(CompanyServiceImpl.class);
+	@SuppressWarnings("unused")
+	private static final Logger logger = Logger.getLogger(CompanyDaoImpl.class);
 
 	public Company findById(int id) {
 		return getByKey(id);
@@ -31,10 +31,8 @@ public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements Com
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Company> findAllCompanies() {
-		logger.debug("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxdao");
+	public List<Company> findAllCompanys(Company company) {
 		Criteria criteria = createEntityCriteria();
-		logger.debug("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxdao2");
 		return (List<Company>) criteria.list();
 	}
 	

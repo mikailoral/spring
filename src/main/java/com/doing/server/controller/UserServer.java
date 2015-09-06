@@ -18,6 +18,7 @@ import com.doing.server.service.UserService;
 @RestController
 public class UserServer {
 
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(UserServer.class);
 
 	@Autowired
@@ -26,20 +27,11 @@ public class UserServer {
 	@Autowired
 	private HttpServletRequest request;
 
-	@RequestMapping(value = "/usertest", method = RequestMethod.GET)
-	public @ResponseBody User usertest() {
 
-		User mood = new User();
-		mood.setId(1);
-		mood.setFullname("name");
-		System.out.println(mood);
-		return mood;
-	}
+	@RequestMapping(value = "/listuser", method = RequestMethod.POST)
+	public @ResponseBody List<User> getUsers(@RequestBody User userp) {
 
-	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
-	public @ResponseBody List<User> getUsers() {
-
-		List<User> list = service.findAllUsers();
+		List<User> list = service.findAllUsers(userp);
 		for (User user : list) {
 			System.out.println(user);
 		}
@@ -50,6 +42,28 @@ public class UserServer {
 	public @ResponseBody User addUser(@RequestBody User user) {
 		service.saveUser(user);
 		return user;
+	}
+	
+	@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+	public @ResponseBody User updateUser(@RequestBody User user) {
+		service.updateUser(user);
+		return user;
+	}
+
+	@RequestMapping(value = "/updateuserlocation", method = RequestMethod.POST)
+	public @ResponseBody User updateLocation(@RequestBody User user) {
+		service.updateLocation(user);
+		return user;
+	}
+
+	@RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
+	public void deleteUser(@RequestBody User user) {
+		service.deleteUserById(user.getId());
+	}
+	
+	@RequestMapping(value = "/getuser", method = RequestMethod.POST)
+	public @ResponseBody User findById(@RequestBody User user) {
+		return service.findById(user.getId());
 	}
 
 

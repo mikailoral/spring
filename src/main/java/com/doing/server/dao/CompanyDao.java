@@ -7,14 +7,9 @@ import com.doing.server.pojo.Company;
 public interface CompanyDao {
 
 	Company findById(int id);
-
 	void saveCompany(Company company);
-	
 	void deleteCompanyById(int id);
-	
-	List<Company> findAllCompanies();
-	
-	Company findCompanyByName(String ssn);
-
+	List<Company> findAllCompanys(Company company);
+	Company findCompanyByName(String name);
 
 }

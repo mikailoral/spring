@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doing.server.dao.CompanyDao;
-import com.doing.server.pojo.Company;
+import com.doing.server.dao.TaskDao;
+import com.doing.server.pojo.Task;
 
-@Service("companyService")
+@Service("taskService")
 @Transactional
-public class CompanyServiceImpl implements CompanyService {
+public class TaskServiceImpl implements TaskService {
 
 	@Autowired
-	private CompanyDao dao;
+	private TaskDao dao;
 	
-	public Company findById(int id) {
+	public Task findById(int id) {
 		return dao.findById(id);
 	}
 
-	public void saveCompany(Company company) {
-		dao.saveCompany(company);
+	public void saveTask(Task task) {
+		dao.saveTask(task);
 	}
 
 	/*
@@ -29,19 +29,19 @@ public class CompanyServiceImpl implements CompanyService {
 	 * Just fetch the entity from db and update it with proper values within transaction.
 	 * It will be updated in db once transaction ends. 
 	 */
-	public void updateCompany(Company company) {
-		Company entity = dao.findById(company.getId());
+	public void updateTask(Task task) {
+		Task entity = dao.findById(task.getId());
 		if(entity!=null){
-			entity.setName(company.getName());
+			entity.setAddress(task.getAddress());
 		}
 	}
 
-	public void deleteCompanyById(int id) {
-		dao.deleteCompanyById(id);
+	public void deleteTaskById(int id) {
+		dao.deleteTaskById(id);
 	}
 	
-	public List<Company> findAllCompanys(Company company) {
-		return dao.findAllCompanys(company);
+	public List<Task> findAllTasks(Task task) {
+		return dao.findAllTasks(task);
 	}
 
 

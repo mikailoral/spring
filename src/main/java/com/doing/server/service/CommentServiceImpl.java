@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doing.server.dao.CompanyDao;
-import com.doing.server.pojo.Company;
+import com.doing.server.dao.CommentDao;
+import com.doing.server.pojo.Comment;
 
-@Service("companyService")
+@Service("commentService")
 @Transactional
-public class CompanyServiceImpl implements CompanyService {
+public class CommentServiceImpl implements CommentService {
 
 	@Autowired
-	private CompanyDao dao;
+	private CommentDao dao;
 	
-	public Company findById(int id) {
+	public Comment findById(int id) {
 		return dao.findById(id);
 	}
 
-	public void saveCompany(Company company) {
-		dao.saveCompany(company);
+	public void saveComment(Comment comment) {
+		dao.saveComment(comment);
 	}
 
 	/*
@@ -29,19 +29,19 @@ public class CompanyServiceImpl implements CompanyService {
 	 * Just fetch the entity from db and update it with proper values within transaction.
 	 * It will be updated in db once transaction ends. 
 	 */
-	public void updateCompany(Company company) {
-		Company entity = dao.findById(company.getId());
+	public void updateComment(Comment comment) {
+		Comment entity = dao.findById(comment.getId());
 		if(entity!=null){
-			entity.setName(company.getName());
+			entity.setComment(comment.getComment());
 		}
 	}
 
-	public void deleteCompanyById(int id) {
-		dao.deleteCompanyById(id);
+	public void deleteCommentById(int id) {
+		dao.deleteCommentById(id);
 	}
 	
-	public List<Company> findAllCompanys(Company company) {
-		return dao.findAllCompanys(company);
+	public List<Comment> findAllComments(Comment comment) {
+		return dao.findAllComments(comment);
 	}
 
 
