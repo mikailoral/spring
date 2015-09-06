@@ -105,6 +105,7 @@ public class Task implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "enddate", nullable = false, length = 19)
 	public Date getEnddate() {
 		return this.enddate;
@@ -115,7 +116,8 @@ public class Task implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdate", nullable = false, length = 19)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "createdate", length = 19)
 	public Date getCreatedate() {
 		return this.createdate;
 	}
@@ -133,7 +135,7 @@ public class Task implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "status", nullable = false)
+	@Column(name = "status")
 	public int getStatus() {
 		return this.status;
 	}

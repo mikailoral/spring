@@ -46,20 +46,22 @@ public class TaskServer {
 	
 	@RequestMapping(value = "/updatetask", method = RequestMethod.POST)
 	public @ResponseBody Task updateTask(@RequestBody Task task) {
-		service.updateTask(task);
-		return task;
+		return service.updateTask(task);
+	}
+
+	@RequestMapping(value = "/updatetaskstatus", method = RequestMethod.POST)
+	public @ResponseBody Task updateTaskStatus(@RequestBody Task task) {
+		return service.updateTaskStatus(task);
 	}
 
 	@RequestMapping(value = "/deletetask", method = RequestMethod.POST)
-	public @ResponseBody Task deleteTask(@RequestBody Task task) {
+	public void deleteTask(@RequestBody Task task) {
 		service.deleteTaskById(task.getId());
-		return task;
 	}
 	
 	@RequestMapping(value = "/gettask", method = RequestMethod.POST)
 	public @ResponseBody Task findById(@RequestBody Task task) {
-		service.findById(task.getId());
-		return task;
+		return service.findById(task.getId());
 	}
 
 
